@@ -6,7 +6,7 @@ public class Movie {
     private String title;
     private String year;
     private String type;
-    private String posterURL;
+    private String poster;
     private String imdbID;
 
     public Movie(String title) {
@@ -37,12 +37,12 @@ public class Movie {
         this.type = type;
     }
 
-    public String getPosterURL() {
-        return posterURL;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setPosterURL(String posterURL) {
-        this.posterURL = posterURL;
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     public String getImdbID() {

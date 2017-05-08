@@ -1,0 +1,44 @@
+
+.text {
+    -fx-font-smoothing-type: gray;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.root {
+    -fx-background-color: #E8EAF6;
+}
+
+.header-background {
+    -fx-background-color: #375eb5;
+}
+
+.content-title {
+    -fx-font-weight: bold;
+}
+
+.movie-pane {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.5, 0, 2);
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #5C6BC0;
+    -fx-prompt-text-fill: #7986CB;
+    -fx-font-size: 21;
+    -fx-text-fill: white;
+}
+
+.text-field:focused {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #9FA8DA;
+}
