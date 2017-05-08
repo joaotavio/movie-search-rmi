@@ -14,9 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import moviesearch.service.Movie;
 import moviesearch.service.MovieSearchService;
-import moviesearch.server.service.MovieSearchServiceServiceImpl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -26,8 +29,10 @@ public class MainController {
     private FlowPane contentPane;
     @FXML
     private TextField searchField;
-
     @FXML
+    private Label labelMessage;
+
+
     private ProgressIndicator progressIndicator;
 
     private MovieSearchService movieSearchService;
@@ -35,13 +40,19 @@ public class MainController {
     @FXML
     private void initialize() {
         try {
-            movieSearchService = new MovieSearchServiceServiceImpl();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+            movieSearchService = (MovieSearchService) Naming.lookup( "//localhost/MovieSearchService");
+        } catch (RemoteException | NotBoundException | MalformedURLException e) {
+            System.out.println(e);
+            labelMessage.setText("ERROR: " + e.getMessage());
         }
 
         searchField.setOnAction(event -> onSearchAction());
+
+        progressIndicator = new ProgressIndicator();
+        progressIndicator.setPrefSize(25, 25);
         progressIndicator.setVisible(false);
+
+        labelMessage.setGraphic(progressIndicator);
     }
 
     private void onSearchAction() {
@@ -54,15 +65,16 @@ public class MainController {
         progressIndicator.setVisible(true);
         contentPane.getChildren().clear();
 
+        labelMessage.setText("");
+
         Thread thread = new Thread(new Task<List<Movie>>() {
             @Override
             protected List<Movie> call() throws Exception {
-                List<Movie> movies = null;
+                List<Movie> movies = new ArrayList<>();
                 try {
                     movies = movieSearchService.search(searchStr);
                 } catch (RemoteException e) {
-                    e.printStackTrace();
-                    Platform.runLater(() -> System.out.println("ERROOOOOOOO"));
+                    Platform.runLater(() -> labelMessage.setText(e.getMessage()));
                 }
                 return movies;
             }

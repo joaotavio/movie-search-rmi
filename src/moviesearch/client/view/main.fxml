@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
+<?import javafx.scene.control.Label?>
 <ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="moviesearch.client.controller.MainController">
@@ -18,7 +19,7 @@
                     <children>
                         <TextField fx:id="searchField" maxWidth="500.0" prefWidth="500.0"
                                    promptText="Search movies, tv shows..." VBox.vgrow="NEVER"/>
-                        <ProgressIndicator fx:id="progressIndicator" prefHeight="25.0" prefWidth="25.0"/>
+                        <Label fx:id="labelMessage" styleClass="label-message"/>
                     </children>
                     <VBox.margin>
                         <Insets/>

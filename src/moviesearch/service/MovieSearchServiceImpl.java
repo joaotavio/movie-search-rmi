@@ -1,4 +1,4 @@
-package moviesearch.server.service;
+package moviesearch.service;
 
 
 import com.google.gson.*;
@@ -16,11 +16,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieSearchServiceServiceImpl extends UnicastRemoteObject implements MovieSearchService {
+public class MovieSearchServiceImpl extends UnicastRemoteObject implements MovieSearchService {
 
     private static final String API_URL_FORMAT = "http://www.omdbapi.com/?s=%s";
 
-    public MovieSearchServiceServiceImpl() throws RemoteException {
+    public MovieSearchServiceImpl() throws RemoteException {
         super();
     }
 
@@ -35,7 +35,6 @@ public class MovieSearchServiceServiceImpl extends UnicastRemoteObject implement
 
             movies = jsonStringToMovies(jsonString);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new RemoteException(String.format("Error trying to search for \"%s\"", name));
         }
 
